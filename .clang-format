@@ -3,7 +3,7 @@
 # Based on LLVM style with specific customizations.
 # ===================================================================
 
-Language: C
+# Language: C
 BasedOnStyle: LLVM
 
 # --- Core User Requirements ---

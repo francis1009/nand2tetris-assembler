@@ -11,7 +11,7 @@ CFLAGS_RELEASE = -O2 -DNDEBUG -flto
 
 # Default assembly file to translate
 # Usage: make run-debug FILE=Pong.asm
-FILE ?= Pong.asm
+FILE ?= Add.asm
 
 # Project structure
 BUILD_DIR = bin

@@ -1,7 +1,9 @@
 #include <stdio.h>
 
+#include "symbol_table.h"
+
 int main(int argc, char **argv) {
-    if (argc < 2) {
+	if (argc < 2) {
 		fprintf(stderr, "Usage: %s <asm_file_name>\n", argv[0]);
 		return 1;
 	}
@@ -10,7 +12,7 @@ int main(int argc, char **argv) {
 	printf("Attempting to read assembly file: %s\n", asm_filename);
 
 	char full_path[256];
-	int result = snprintf(full_path, sizeof(full_path), "asm/%s", filename);
+	int result = snprintf(full_path, sizeof(full_path), "asm/%s", asm_filename);
 	if (result < 0 || result >= (int) sizeof(full_path)) {
 		fprintf(stderr, "Error: Assembly filename is too long.\n");
 		return 1;
@@ -28,5 +30,5 @@ int main(int argc, char **argv) {
 	}
 
 	fclose(file);
-    return 0;
+	return 0;
 }
