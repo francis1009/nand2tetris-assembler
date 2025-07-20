@@ -15,19 +15,19 @@ const char *translator_comp_to_bin(char *comp) {
 	if (strcmp(comp, "D+1") == 0) return "0011111";
 	if (strcmp(comp, "A+1") == 0) return "0110111";
 	if (strcmp(comp, "M+1") == 0) return "1110111";
-	if (strcmp(comp, "D-1") == 0) return "";
-	if (strcmp(comp, "A-1") == 0) return "";
-	if (strcmp(comp, "M-1") == 0) return "";
-	if (strcmp(comp, "D+A") == 0) return "";
-	if (strcmp(comp, "D+M") == 0) return "";
-	if (strcmp(comp, "D-A") == 0) return "";
-	if (strcmp(comp, "D-M") == 0) return "";
-	if (strcmp(comp, "A-D") == 0) return "";
-	if (strcmp(comp, "M-D") == 0) return "";
-	if (strcmp(comp, "D&A") == 0) return "";
-	if (strcmp(comp, "D&M") == 0) return "";
-	if (strcmp(comp, "D|A") == 0) return "";
-	if (strcmp(comp, "D|M") == 0) return "";
+	if (strcmp(comp, "D-1") == 0) return "0001110";
+	if (strcmp(comp, "A-1") == 0) return "0110010";
+	if (strcmp(comp, "M-1") == 0) return "1110010";
+	if (strcmp(comp, "D+A") == 0) return "0000010";
+	if (strcmp(comp, "D+M") == 0) return "1000010";
+	if (strcmp(comp, "D-A") == 0) return "0010011";
+	if (strcmp(comp, "D-M") == 0) return "1010011";
+	if (strcmp(comp, "A-D") == 0) return "0000111";
+	if (strcmp(comp, "M-D") == 0) return "1000111";
+	if (strcmp(comp, "D&A") == 0) return "0000000";
+	if (strcmp(comp, "D&M") == 0) return "1000000";
+	if (strcmp(comp, "D|A") == 0) return "0010101";
+	if (strcmp(comp, "D|M") == 0) return "1010101";
 	return "0000000";
 }
 
