@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 #include "symbol_table.h"
+#include "parser.h"
+#include "translator.h"
 
 int main(int argc, char **argv) {
 	if (argc < 2) {
@@ -30,8 +32,9 @@ int main(int argc, char **argv) {
 
 
 	char line[256];
+	ParsedLine parsed;
 	while (fgets(line, sizeof(line), file)) {
-		printf("%s", line);
+		parsed = parser_parse(line);
 	}
 
 	fclose(file);

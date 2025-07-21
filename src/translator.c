@@ -1,6 +1,12 @@
 #include "translator.h"
 
 #include <string.h>
+#include "symbol_table.h"
+
+const char *translator_a_instruction(Node *symbol_table, char *symbol) {
+	unsigned int value = symbol_table_search(symbol_table, symbol);
+	
+}
 
 const char *translator_comp_to_bin(char *comp) {
 	if (strcmp(comp, "0") == 0) return "0101010";
