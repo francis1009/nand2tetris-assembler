@@ -70,3 +70,6 @@ compile_commands.json
 
 # IDE and Editor configs
 /.vscode/
+
+# Hack output files
+*.hack
