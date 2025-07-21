@@ -58,3 +58,15 @@ unsigned int symbol_table_search(Node *symbol_table, char *symbol) {
 
     return -1;
 }
+
+void symbol_table_free(Node* symbol_table) {
+    Node *current = symbol_table->next;
+    while (current != NULL) {
+        Node *to_free = current;
+        free(to_free->symbol);
+        current = current->next;
+        free(to_free);
+    }
+
+    symbol_table->next = NULL;
+}

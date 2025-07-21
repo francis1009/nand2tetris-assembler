@@ -10,5 +10,6 @@ typedef struct Node {
 void symbol_table_init(Node *symbol_table, Node **tail);
 void symbol_table_add(Node **tail, char *symbol, unsigned int value);
 unsigned int symbol_table_search(Node *symbol_table, char *symbol);
+void symbol_table_free(Node *symbol_table);
 
 #endif
