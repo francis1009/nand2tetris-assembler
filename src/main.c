@@ -24,6 +24,11 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 
+	Node symbol_table;
+	Node *tail = &symbol_table;
+	symbol_table_init(&symbol_table, &tail);
+
+
 	char line[256];
 	while (fgets(line, sizeof(line), file)) {
 		printf("%s", line);

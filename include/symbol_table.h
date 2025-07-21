@@ -7,8 +7,8 @@ typedef struct Node {
 	struct Node *next;
 } Node;
 
-void symbol_table_init(Node *symbol_table);
-void symbol_table_add(Node *symbol_table, char *symbol, unsigned int value);
+void symbol_table_init(Node *symbol_table, Node **tail);
+void symbol_table_add(Node **tail, char *symbol, unsigned int value);
 unsigned int symbol_table_search(Node *symbol_table, char *symbol);
 
 #endif
