@@ -1,4 +1,3 @@
-
 # Compiler
 CC = clang
 
@@ -10,7 +9,7 @@ CFLAGS_DEBUG = -g -O0 -Wall -Wextra -Wpedantic -fsanitize=address,undefined
 CFLAGS_RELEASE = -O2 -DNDEBUG -flto
 
 # Default assembly file to translate
-# Usage: make run-debug FILE=Pong.asm
+# Usage: make run FILE=Pong.asm
 FILE ?= Add.asm
 
 # Project structure
@@ -30,7 +29,7 @@ OBJECTS_RELEASE = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR_RELEASE)/%.o,$(SOURCES))
 .PHONY: all debug release clean run run-debug run-release
 
 # Default target
-all: debug
+all: release
 
 # Build rules
 debug: $(TARGET_DEBUG)
@@ -59,7 +58,7 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 # Run rules
-run: run-debug
+run: run-release
 
 run-debug: debug
 	@echo "--- Running Debug Build with FILE: $(FILE) ---"
