@@ -80,11 +80,11 @@ The assembler is run from the command line, taking the name of an assembly file 
 
 1.  Place your assembly files (e.g., `Pong.asm`) inside the `asm/` directory.
 
-2.  Run the assembler from the project root, specifying the file name with the FILE variable. The Makefile automatically looks for the file inside the asm/ directory.
+2.  Run the assembler from the project root, specifying the file name with the FILE variable. The Makefile automatically looks for the file inside the `asm/` directory.
 
     ```sh
     # Example using the release build
-    make run-release FILE=Pong.asm
+    make run FILE=Pong.asm
     ```
 
 3.  The translated machine code will be written to `output.hack` in the project's root directory.
