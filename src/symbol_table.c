@@ -9,29 +9,15 @@ void symbol_table_init(Node *symbol_table, Node **tail) {
 	symbol_table->value = 0;
 	symbol_table->next = NULL;
 
-	symbol_table_add(tail, "R0", 0);
-	symbol_table_add(tail, "R1", 1);
-	symbol_table_add(tail, "R2", 2);
-	symbol_table_add(tail, "R3", 3);
-	symbol_table_add(tail, "R4", 4);
-	symbol_table_add(tail, "R5", 5);
-	symbol_table_add(tail, "R6", 6);
-	symbol_table_add(tail, "R7", 7);
-	symbol_table_add(tail, "R8", 8);
-	symbol_table_add(tail, "R9", 9);
-	symbol_table_add(tail, "R10", 10);
-	symbol_table_add(tail, "R11", 11);
-	symbol_table_add(tail, "R12", 12);
-	symbol_table_add(tail, "R13", 13);
-	symbol_table_add(tail, "R14", 14);
-	symbol_table_add(tail, "R15", 15);
-	symbol_table_add(tail, "SCREEN", 16384);
-	symbol_table_add(tail, "KBD", 24576);
-	symbol_table_add(tail, "SP", 0);
-	symbol_table_add(tail, "LCL", 1);
-	symbol_table_add(tail, "ARG", 2);
-	symbol_table_add(tail, "THIS", 3);
-	symbol_table_add(tail, "THAT", 4);
+	char *symbols[] = {"R0",		 "R1",	"R2",	 "R3",	"R4",	 "R5",	 "R6",	"R7",
+										 "R8",		 "R9",	"R10", "R11", "R12", "R13",	 "R14", "R15",
+										 "SCREEN", "KBD", "SP",	 "LCL", "ARG", "THIS", "THAT"};
+	unsigned values[] = {0,	 1,	 2,	 3,	 4,			5,		 6, 7, 8, 9, 10, 11,
+											 12, 13, 14, 15, 16384, 24576, 0, 1, 2, 3, 4};
+
+	for (unsigned long i = 0; i < sizeof(symbols) / sizeof(symbols[0]); i++) {
+		symbol_table_add(tail, symbols[i], values[i]);
+	}
 }
 
 void symbol_table_add(Node **tail, char *symbol, unsigned int value) {
@@ -56,7 +42,7 @@ unsigned int symbol_table_search(Node *symbol_table, char *symbol) {
 		current = current->next;
 	}
 
-	return -1;
+	return SYMBOL_NOT_FOUND;
 }
 
 void symbol_table_free(Node *symbol_table) {

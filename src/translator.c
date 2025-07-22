@@ -1,12 +1,9 @@
 #include "translator.h"
 
-#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "symbol_table.h"
-
-char *translator_a_instruction(Node *symbol_table, char *symbol) {
+char *translator_a_instruction(char *symbol) {
 	int dec = atoi(symbol);
 	char bin[16] = "000000000000000";
 	int idx = 14;
@@ -36,8 +33,14 @@ const char *translator_comp_to_bin(char *comp) {
 	if (strcmp(comp, "!D") == 0)
 		return "0001101";
 	if (strcmp(comp, "!A") == 0)
-		return "0110011";
+		return "0110001";
 	if (strcmp(comp, "!M") == 0)
+		return "1110001";
+	if (strcmp(comp, "-D") == 0)
+		return "0001111";
+	if (strcmp(comp, "-A") == 0)
+		return "0110011";
+	if (strcmp(comp, "-M") == 0)
 		return "1110011";
 	if (strcmp(comp, "D+1") == 0)
 		return "0011111";

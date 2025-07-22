@@ -1,6 +1,7 @@
 #include "parser.h"
 
 #include <ctype.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -38,7 +39,9 @@ ParsedLine parser_parse(char *line) {
 
 	trim_whitespace(line);
 
-	if (line[0] == '/') {
+	if (line[0] == '\0') {
+		return parsed;
+	} else if (line[0] == '/') {
 		parsed.type = COMMENT;
 	} else if (line[0] == '@') {
 		parsed.type = A_INSTRUCTION;
@@ -46,33 +49,28 @@ ParsedLine parser_parse(char *line) {
 	} else if (line[0] == '(') {
 		parsed.type = L_INSTRUCTION;
 		snprintf(parsed.symbol, sizeof(parsed.symbol), "%.*s",
-						 (int) sizeof(line) - 2, line + 1);
-	} else if (line[0] == '\0') {
-		// do nothing
+						 (int) strlen(line) - 2, line + 1);
 	} else {
 		parsed.type = C_INSTRUCTION;
-		char *token = strtok(line, "=");
-		if (token) {
-			snprintf(parsed.dest, sizeof(parsed.dest), "%s", token);
-			token = strtok(NULL, ";");
-			if (token) {
-				snprintf(parsed.comp, sizeof(parsed.comp), "%s", token);
-			}
-			token = strtok(NULL, "");
-			if (token) {
-				snprintf(parsed.jump, sizeof(parsed.jump), "%s", token);
-			}
-		} else {
-			token = strtok(line, ";");
-			if (token) {
-				snprintf(parsed.comp, sizeof(parsed.comp), "%s", token);
-				token = strtok(NULL, "");
-				if (token) {
-					snprintf(parsed.jump, sizeof(parsed.jump), "%s", token);
-				}
+		char *equal = strchr(line, '=');
+		char *semicolon = strchr(line, ';');
+
+		if (equal) {
+			int dest_len = equal - line;
+			snprintf(parsed.dest, sizeof(parsed.dest), "%.*s", dest_len, line);
+			if (semicolon) {
+				int comp_len = semicolon - equal;
+				snprintf(parsed.comp, sizeof(parsed.comp), "%.*s", comp_len, equal + 1);
+				snprintf(parsed.jump, sizeof(parsed.jump), "%s", semicolon + 1);
 			} else {
-				snprintf(parsed.comp, sizeof(parsed.comp), "%s", line);
+				snprintf(parsed.comp, sizeof(parsed.comp), "%s", equal + 1);
 			}
+		} else if (semicolon) {
+			int comp_len = semicolon - line;
+			snprintf(parsed.comp, sizeof(parsed.comp), "%.*s", comp_len, line);
+			snprintf(parsed.jump, sizeof(parsed.jump), "%s", semicolon + 1);
+		} else {
+			snprintf(parsed.comp, sizeof(parsed.comp), "%s", line);
 		}
 	}
 
